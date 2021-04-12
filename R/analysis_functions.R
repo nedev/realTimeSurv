@@ -390,7 +390,9 @@ mincontrast_st <- function(data,covariates,boundary){
   requireNamespace("spatstat")
   popVal <- function(x,y){
     spp <- sp::SpatialPoints(data.frame(x=x,y=y))
-    sp::proj4string(spp) <- sp::proj4string(covariates)
+    #sp::proj4string(spp) <- sp::proj4string(covariates)
+    spp <-  sp::proj4string(spp)
+    covariates <- sp::proj4string(covariates)
     val <- sp::over(spp,covariates)
     return(val[,"popdens"])
   }
